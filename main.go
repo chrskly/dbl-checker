@@ -7,8 +7,6 @@ import (
     "bufio"
 )
 
-// foo.dbl.spamhaus.org
-
 func main () {
 
     // We'll send a series of domains into the domains channel for lookup
@@ -29,10 +27,8 @@ func main () {
         items = items + 1
     }
     close(domains)
-    fmt.Printf("Pushed %d domains\n", items)
 
     // Read back the results
-    fmt.Println("Collecting results")
     bad_domains := 0
     for i := 0; i < items; i++ {
         if ! <-results {
