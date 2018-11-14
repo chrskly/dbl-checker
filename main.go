@@ -12,7 +12,7 @@ func main () {
     // We'll send a series of domains into the domains channel for lookup
     domains := make(chan string, 300000)
     // Results channel to indicate when worker is done
-    results := make(chan bool, 300000)
+    results := make(chan DblCheckResult, 300000)
 
     // Start up some workers
     for w := 1; w <= 50; w++ {
@@ -31,7 +31,9 @@ func main () {
     // Read back the results
     bad_domains := 0
     for i := 0; i < items; i++ {
-        if ! <-results {
+        r := <-results
+        if ! r.OK {
+            fmt.Println(r.Domain, r.StatusHuman, "[", r.StatusIP, "]")
             bad_domains = bad_domains + 1
         }
     }
