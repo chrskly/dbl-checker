@@ -16,7 +16,7 @@ func main () {
 
     // Start up some workers
     for w := 1; w <= 50; w++ {
-        go RblWorker(w, domains, results)
+        go DblWorker(w, domains, results)
     }
 
     // Take domains from stdin and push them into the domains channel
