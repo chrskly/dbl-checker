@@ -99,9 +99,6 @@ func DblWorker(worker_id int, domains <-chan string, results chan<- DblCheckResu
     for domain := range domains {
         result, err := DblCheck(domain)
         _ = err
-        //if result.StatusHuman != NOT_LISTED {
-        //    fmt.Println(domain)
-        //}
         results <- result
     }
 }
